@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2315AF5A2BF6590300093BE9 /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2315AF592BF6590300093BE9 /* ImageCollectionViewCell.swift */; };
+		2315AF5C2BF6591A00093BE9 /* ImageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2315AF5B2BF6591A00093BE9 /* ImageCollectionViewCell.xib */; };
+		2315AF5E2BF65C5100093BE9 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2315AF5D2BF65C5100093BE9 /* Extensions.swift */; };
 		23ED01812BF5206000A41E48 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23ED01802BF5206000A41E48 /* AppDelegate.swift */; };
 		23ED01832BF5206000A41E48 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23ED01822BF5206000A41E48 /* SceneDelegate.swift */; };
 		23ED01852BF5206000A41E48 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23ED01842BF5206000A41E48 /* ViewController.swift */; };
@@ -19,9 +22,15 @@
 		23ED019E2BF52AFB00A41E48 /* ResultsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 23ED019D2BF52AFB00A41E48 /* ResultsViewController.xib */; };
 		23ED01A02BF52C5A00A41E48 /* GalleryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 23ED019F2BF52C5900A41E48 /* GalleryViewController.xib */; };
 		23ED01A22BF52C6500A41E48 /* GalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23ED01A12BF52C6500A41E48 /* GalleryViewController.swift */; };
+		23ED01A42BF53D4E00A41E48 /* ResultsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23ED01A32BF53D4E00A41E48 /* ResultsViewModel.swift */; };
+		23ED01A62BF53FCC00A41E48 /* GalleryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23ED01A52BF53FCC00A41E48 /* GalleryViewModel.swift */; };
+		23ED01A82BF6557200A41E48 /* LiveFeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23ED01A72BF6557200A41E48 /* LiveFeedViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2315AF592BF6590300093BE9 /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
+		2315AF5B2BF6591A00093BE9 /* ImageCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageCollectionViewCell.xib; sourceTree = "<group>"; };
+		2315AF5D2BF65C5100093BE9 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		23ED017D2BF5206000A41E48 /* JiviAssignment.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JiviAssignment.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		23ED01802BF5206000A41E48 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		23ED01822BF5206000A41E48 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -36,6 +45,9 @@
 		23ED019D2BF52AFB00A41E48 /* ResultsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ResultsViewController.xib; sourceTree = "<group>"; };
 		23ED019F2BF52C5900A41E48 /* GalleryViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GalleryViewController.xib; sourceTree = "<group>"; };
 		23ED01A12BF52C6500A41E48 /* GalleryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryViewController.swift; sourceTree = "<group>"; };
+		23ED01A32BF53D4E00A41E48 /* ResultsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsViewModel.swift; sourceTree = "<group>"; };
+		23ED01A52BF53FCC00A41E48 /* GalleryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryViewModel.swift; sourceTree = "<group>"; };
+		23ED01A72BF6557200A41E48 /* LiveFeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveFeedViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,6 +61,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2315AF582BF658E300093BE9 /* CollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				2315AF592BF6590300093BE9 /* ImageCollectionViewCell.swift */,
+				2315AF5B2BF6591A00093BE9 /* ImageCollectionViewCell.xib */,
+			);
+			path = CollectionViewCell;
+			sourceTree = "<group>";
+		};
 		23ED01742BF5206000A41E48 = {
 			isa = PBXGroup;
 			children = (
@@ -78,6 +99,7 @@
 				23ED01892BF5206200A41E48 /* Assets.xcassets */,
 				23ED018B2BF5206200A41E48 /* LaunchScreen.storyboard */,
 				23ED018E2BF5206200A41E48 /* Info.plist */,
+				2315AF5D2BF65C5100093BE9 /* Extensions.swift */,
 			);
 			path = JiviAssignment;
 			sourceTree = "<group>";
@@ -85,8 +107,10 @@
 		23ED01942BF5298B00A41E48 /* LiveFeed */ = {
 			isa = PBXGroup;
 			children = (
+				2315AF582BF658E300093BE9 /* CollectionViewCell */,
 				23ED01972BF52A3A00A41E48 /* LiveFeedViewController.swift */,
 				23ED01992BF52A6600A41E48 /* LiveFeedViewController.xib */,
+				23ED01A72BF6557200A41E48 /* LiveFeedViewModel.swift */,
 			);
 			path = LiveFeed;
 			sourceTree = "<group>";
@@ -96,6 +120,7 @@
 			children = (
 				23ED019B2BF52AE600A41E48 /* ResultsViewController.swift */,
 				23ED019D2BF52AFB00A41E48 /* ResultsViewController.xib */,
+				23ED01A32BF53D4E00A41E48 /* ResultsViewModel.swift */,
 			);
 			path = Results;
 			sourceTree = "<group>";
@@ -105,6 +130,7 @@
 			children = (
 				23ED019F2BF52C5900A41E48 /* GalleryViewController.xib */,
 				23ED01A12BF52C6500A41E48 /* GalleryViewController.swift */,
+				23ED01A52BF53FCC00A41E48 /* GalleryViewModel.swift */,
 			);
 			path = Gallery;
 			sourceTree = "<group>";
@@ -170,6 +196,7 @@
 				23ED018D2BF5206200A41E48 /* LaunchScreen.storyboard in Resources */,
 				23ED01A02BF52C5A00A41E48 /* GalleryViewController.xib in Resources */,
 				23ED018A2BF5206200A41E48 /* Assets.xcassets in Resources */,
+				2315AF5C2BF6591A00093BE9 /* ImageCollectionViewCell.xib in Resources */,
 				23ED019E2BF52AFB00A41E48 /* ResultsViewController.xib in Resources */,
 				23ED019A2BF52A6600A41E48 /* LiveFeedViewController.xib in Resources */,
 				23ED01882BF5206000A41E48 /* Main.storyboard in Resources */,
@@ -184,10 +211,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				23ED01852BF5206000A41E48 /* ViewController.swift in Sources */,
+				23ED01A42BF53D4E00A41E48 /* ResultsViewModel.swift in Sources */,
+				23ED01A82BF6557200A41E48 /* LiveFeedViewModel.swift in Sources */,
 				23ED01812BF5206000A41E48 /* AppDelegate.swift in Sources */,
 				23ED01982BF52A3A00A41E48 /* LiveFeedViewController.swift in Sources */,
 				23ED01A22BF52C6500A41E48 /* GalleryViewController.swift in Sources */,
+				2315AF5A2BF6590300093BE9 /* ImageCollectionViewCell.swift in Sources */,
+				23ED01A62BF53FCC00A41E48 /* GalleryViewModel.swift in Sources */,
 				23ED019C2BF52AE600A41E48 /* ResultsViewController.swift in Sources */,
+				2315AF5E2BF65C5100093BE9 /* Extensions.swift in Sources */,
 				23ED01832BF5206000A41E48 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

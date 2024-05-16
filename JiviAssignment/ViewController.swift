@@ -15,5 +15,28 @@ class ViewController: UIViewController {
     }
 
 
+    @IBAction func cameraPressed(_ sender: Any) {
+        let galleryVC = LiveFeedViewControllerFactory.produce()
+        let navigation = UINavigationController(rootViewController: galleryVC)
+        navigation.isNavigationBarHidden = true
+        navigation.isModalInPresentation = true
+        navigation.interactivePopGestureRecognizer?.isEnabled = true
+        navigation.interactivePopGestureRecognizer?.delegate = nil
+        navigation.modalPresentationStyle = .fullScreen
+        navigation.modalTransitionStyle = .crossDissolve
+        self.present(navigation, animated: true)
+    }
+    
+    @IBAction func galleryPressed(_ sender: Any) {
+        let galleryVC = GalleryViewControllerFactory.produce()
+        let navigation = UINavigationController(rootViewController: galleryVC)
+        navigation.isNavigationBarHidden = true
+        navigation.isModalInPresentation = true
+        navigation.interactivePopGestureRecognizer?.isEnabled = true
+        navigation.interactivePopGestureRecognizer?.delegate = nil
+        navigation.modalPresentationStyle = .fullScreen
+        navigation.modalTransitionStyle = .crossDissolve
+        self.present(navigation, animated: true)
+    }
 }
 
