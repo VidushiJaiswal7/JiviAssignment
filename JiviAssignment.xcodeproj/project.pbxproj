@@ -38,6 +38,7 @@
 		237514A42BF6970D00CFE375 /* JiviFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JiviFileManager.swift; sourceTree = "<group>"; };
 		237514A62BF6971700CFE375 /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		237514A82BF6972300CFE375 /* ResultModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultModel.swift; sourceTree = "<group>"; };
+		239EF98F2BF6AE20001DEDAA /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		23ED017D2BF5206000A41E48 /* JiviAssignment.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JiviAssignment.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		23ED01802BF5206000A41E48 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		23ED01822BF5206000A41E48 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -94,6 +95,7 @@
 		23ED01742BF5206000A41E48 = {
 			isa = PBXGroup;
 			children = (
+				239EF98F2BF6AE20001DEDAA /* README.md */,
 				23ED017F2BF5206000A41E48 /* JiviAssignment */,
 				23ED017E2BF5206000A41E48 /* Products */,
 				ACC3EC30C93DA9725BAD5785 /* Pods */,
