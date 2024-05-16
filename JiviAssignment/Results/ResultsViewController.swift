@@ -10,29 +10,54 @@ import UIKit
 import Vision
 
 class ResultsViewControllerFactory: NSObject {
-    class func produce(withImages images: [UIImage]) -> ResultsViewController {
+    class func produce(withImages images: [UIImage],
+                       isFromGallery: Bool = false) -> ResultsViewController {
         let resultsVC = ResultsViewController(nibName: "ResultsViewController",
                                                bundle: nil)
         resultsVC.images = images
+        resultsVC.isFromGallery = isFromGallery
         return resultsVC
     }
 }
 
+protocol ResultsViewControllerDelegate {
+    func dismissVC()
+}
+
 class ResultsViewController: UIViewController {
-    
+    @IBOutlet weak var stateButton: UIButton!
     @IBOutlet weak var imageView: UIImageView!
-    var image: UIImage?
-    var images: [UIImage] = []
-    var selectedIndex = 0  { didSet {
+    
+    var delegate: ResultsViewControllerDelegate?
+    
+    fileprivate var isFromGallery: Bool = false
+    fileprivate var images: [UIImage] = []
+    
+    private var image: UIImage?
+    private  var selectedIndex = 0  { didSet {
         self.handleImage()
     }}
     private var faceLayers: [CAShapeLayer] = []
-    var scaledImageRect: CGRect?
+    private var scaledImageRect: CGRect?
     
-    var viewModel = ResultsViewModel()
+    private var viewModel = ResultsViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+    }
+    
+    @IBAction func dismissPressed(_ sender: Any) {
+        self.dismiss(animated: true)
+        delegate?.dismissVC()
+    }
+    
+    @IBAction func saveResultsPressed(_ sender: Any) {
         
     }
     
@@ -100,7 +125,7 @@ class ResultsViewController: UIViewController {
     }
     
     private func performVisionRequest(image: CGImage) {
-         
+        self.stateButton.setTitle("Processing", for: .normal)
          let faceDetectionRequest = VNDetectFaceLandmarksRequest(completionHandler: self.handleFaceDetectionRequest)
 
          let requests = [faceDetectionRequest]
@@ -135,8 +160,9 @@ class ResultsViewController: UIViewController {
             self.deleteDrawing()
             self.imageView.layer.sublayers = nil
             
-            if let results = request?.results as? [VNFaceObservation] {
-                
+            if let results = request?.results as? [VNFaceObservation],
+               results.count > 0 {
+                self.stateButton.setTitle("Processed", for: .normal)
                 for observation in results {
                     
                     print(observation.boundingBox)
@@ -160,19 +186,11 @@ class ResultsViewController: UIViewController {
                         if let leftEye = landmarks.leftEye {
                             self.handleLandmark(leftEye, faceBoundingBox: scaledObservationRect)
                         }
-//                        
-//                        if let leftEyebrow = landmarks.leftEyebrow {
-//                            self.handleLandmark(leftEyebrow, faceBoundingBox: scaledObservationRect)
-//                        }
                         
                         if let rightEye = landmarks.rightEye {
                             self.handleLandmark(rightEye, faceBoundingBox: scaledObservationRect)
                         }
                         
-//                        if let rightEyebrow = landmarks.rightEyebrow {
-//                            self.handleLandmark(rightEyebrow, faceBoundingBox: scaledObservationRect)
-//                        }
-
                         if let nose = landmarks.nose {
                             self.handleLandmark(nose, faceBoundingBox: scaledObservationRect)
                         }
@@ -180,12 +198,10 @@ class ResultsViewController: UIViewController {
                         if let outerLips = landmarks.outerLips {
                             self.handleLandmark(outerLips, faceBoundingBox: scaledObservationRect)
                         }
-                        
-//                        if let innerLips = landmarks.innerLips {
-//                            self.handleLandmark(innerLips, faceBoundingBox: scaledObservationRect)
-//                        }
                     }
                 }
+            } else {
+                self.stateButton.setTitle("Invalid", for: .normal)
             }
         }
     }
@@ -199,12 +215,6 @@ class ResultsViewController: UIViewController {
                     x: eyePoint.y * faceBoundingBox.height + faceBoundingBox.origin.x,
                     y: eyePoint.x * faceBoundingBox.width + faceBoundingBox.origin.y)
             })
-//        landmarkPath.addLines(between: landmarkPathPoints)
-//        landmarkPath.closeSubpath()
-//        let landmarkLayer = CAShapeLayer()
-//        landmarkLayer.path = landmarkPath
-//        landmarkLayer.fillColor = UIColor.clear.cgColor
-//        landmarkLayer.strokeColor = UIColor.green.cgColor
         
         // Draw the point
         let circlePath = UIBezierPath(arcCenter: landmarkPathPoints.first ?? CGPoint(x: 0, y: 0), radius: 3.0, startAngle: 0.0, endAngle: CGFloat(Double.pi * 2), clockwise: true)
@@ -217,23 +227,20 @@ class ResultsViewController: UIViewController {
         shapeLayer.name = "shape"
          
          view.layer.addSublayer(shapeLayer)
-
-//        self.faceLayers.append(landmarkLayer)
-//        self.view.layer.addSublayer(landmarkLayer)
         
         if let firstPoint = landmarkPathPoints.first {
               let convertedPoint = firstPoint
               let labelLayer = CATextLayer()
             labelLayer.string = viewModel.abmornmalities.randomElement()
               labelLayer.foregroundColor = UIColor.blue.cgColor
-              labelLayer.fontSize = 12
-              labelLayer.frame = CGRect(x: convertedPoint.x, y: convertedPoint.y, width: 50, height: 20)
+              labelLayer.fontSize = 10
+              labelLayer.frame = CGRect(x: convertedPoint.x, y: convertedPoint.y, width: 80, height: 20)
             labelLayer.name = "label"
               view.layer.addSublayer(labelLayer)
           }
     }
     
-    func deleteDrawing() {
+    private func deleteDrawing() {
         view.layer.sublayers?.forEach { layer in
             if layer.name == "label" || layer.name == "shape" {
                    layer.removeFromSuperlayer()

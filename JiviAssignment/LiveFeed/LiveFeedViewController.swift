@@ -72,7 +72,7 @@ class LiveFeedViewController: UIViewController {
     }
     
     @IBAction func backPressed(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
+        self.dismiss(animated: true)
     }
     
     @IBAction func capturePressed(_ sender: Any) {

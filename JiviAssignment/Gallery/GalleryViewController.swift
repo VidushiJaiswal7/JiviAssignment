@@ -37,7 +37,7 @@ class GalleryViewController: UIViewController {
                 DispatchQueue.main.async {
                     var configuration = PHPickerConfiguration()
                     configuration.filter = .any(of: [.images])
-                    configuration.selectionLimit = 1
+                    configuration.selectionLimit = 10
                     let picker = PHPickerViewController(configuration: configuration)
                     picker.delegate = self
                     self.present(picker, animated: true)
@@ -56,26 +56,39 @@ class GalleryViewController: UIViewController {
         // TODO: add alert here
     }
     
-    private func openResults(forImage image: UIImage) {
+    private func openResults(forImages images: [UIImage]) {
         DispatchQueue.main.async {
-            let resultsVC = ResultsViewControllerFactory.produce(withImages: [image])
-            self.present(resultsVC, animated: true)
+            let resultsVC = ResultsViewControllerFactory.produce(withImages: images,
+                                                                 isFromGallery: true)
+            resultsVC.delegate = self
+            self.navigationController?.pushViewController(resultsVC, animated: true)
         }
     }
     
     
 }
 
+extension GalleryViewController: ResultsViewControllerDelegate {
+    func dismissVC() {
+        self.dismiss(animated: true)
+    }
+}
+
 extension GalleryViewController: PHPickerViewControllerDelegate {
     public func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
         picker.dismiss(animated: true, completion: nil)
+        var images: [UIImage] = []
         for result: PHPickerResult in results {
             let itemProvider = result.itemProvider
             if result.itemProvider.canLoadObject(ofClass: UIImage.self) {
                 result.itemProvider.loadObject(ofClass: UIImage.self) { [weak self] image, error in
                     guard let self = self else { return }
                     if let image = image as? UIImage {
-                        self.openResults(forImage: image)
+                        images.append(image)
+                        
+                        if images.count == results.count {
+                            self.openResults(forImages: images)
+                        }
                     }
                 }
             }
