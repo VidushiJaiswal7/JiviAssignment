@@ -58,7 +58,7 @@ class GalleryViewController: UIViewController {
     
     private func openResults(forImage image: UIImage) {
         DispatchQueue.main.async {
-            let resultsVC = ResultsViewControllerFactory.produce(withImage: image)
+            let resultsVC = ResultsViewControllerFactory.produce(withImages: [image])
             self.present(resultsVC, animated: true)
         }
     }

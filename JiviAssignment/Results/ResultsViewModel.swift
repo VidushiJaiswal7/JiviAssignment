@@ -15,6 +15,6 @@ class ResultsViewModel {
     
     
     // MARK: Init
-    
+    var abmornmalities: [String] = ["Firmness", "Wrinkles", "Spots", "Pigmentation", "Acne", "Pores"]
 }
     

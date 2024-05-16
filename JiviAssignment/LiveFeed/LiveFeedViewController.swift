@@ -64,6 +64,8 @@ class LiveFeedViewController: UIViewController {
     @IBAction func proceedPressed(_ sender: Any) {
         if images.count > 0 {
             // show results
+            let resultsVC = ResultsViewControllerFactory.produce(withImages: images)
+            self.navigationController?.pushViewController(resultsVC, animated: true)
         } else {
             // show alert 
         }

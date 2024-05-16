@@ -10,6 +10,8 @@
 		2315AF5A2BF6590300093BE9 /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2315AF592BF6590300093BE9 /* ImageCollectionViewCell.swift */; };
 		2315AF5C2BF6591A00093BE9 /* ImageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2315AF5B2BF6591A00093BE9 /* ImageCollectionViewCell.xib */; };
 		2315AF5E2BF65C5100093BE9 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2315AF5D2BF65C5100093BE9 /* Extensions.swift */; };
+		2315AF612BF6646200093BE9 /* ImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2315AF602BF6646200093BE9 /* ImageTableViewCell.swift */; };
+		2315AF632BF6647800093BE9 /* ImageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2315AF622BF6647800093BE9 /* ImageTableViewCell.xib */; };
 		23ED01812BF5206000A41E48 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23ED01802BF5206000A41E48 /* AppDelegate.swift */; };
 		23ED01832BF5206000A41E48 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23ED01822BF5206000A41E48 /* SceneDelegate.swift */; };
 		23ED01852BF5206000A41E48 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23ED01842BF5206000A41E48 /* ViewController.swift */; };
@@ -31,6 +33,8 @@
 		2315AF592BF6590300093BE9 /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		2315AF5B2BF6591A00093BE9 /* ImageCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageCollectionViewCell.xib; sourceTree = "<group>"; };
 		2315AF5D2BF65C5100093BE9 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		2315AF602BF6646200093BE9 /* ImageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTableViewCell.swift; sourceTree = "<group>"; };
+		2315AF622BF6647800093BE9 /* ImageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageTableViewCell.xib; sourceTree = "<group>"; };
 		23ED017D2BF5206000A41E48 /* JiviAssignment.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JiviAssignment.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		23ED01802BF5206000A41E48 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		23ED01822BF5206000A41E48 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -68,6 +72,15 @@
 				2315AF5B2BF6591A00093BE9 /* ImageCollectionViewCell.xib */,
 			);
 			path = CollectionViewCell;
+			sourceTree = "<group>";
+		};
+		2315AF5F2BF663EF00093BE9 /* TableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				2315AF602BF6646200093BE9 /* ImageTableViewCell.swift */,
+				2315AF622BF6647800093BE9 /* ImageTableViewCell.xib */,
+			);
+			path = TableViewCells;
 			sourceTree = "<group>";
 		};
 		23ED01742BF5206000A41E48 = {
@@ -118,6 +131,7 @@
 		23ED01952BF529B800A41E48 /* Results */ = {
 			isa = PBXGroup;
 			children = (
+				2315AF5F2BF663EF00093BE9 /* TableViewCells */,
 				23ED019B2BF52AE600A41E48 /* ResultsViewController.swift */,
 				23ED019D2BF52AFB00A41E48 /* ResultsViewController.xib */,
 				23ED01A32BF53D4E00A41E48 /* ResultsViewModel.swift */,
@@ -198,6 +212,7 @@
 				23ED018A2BF5206200A41E48 /* Assets.xcassets in Resources */,
 				2315AF5C2BF6591A00093BE9 /* ImageCollectionViewCell.xib in Resources */,
 				23ED019E2BF52AFB00A41E48 /* ResultsViewController.xib in Resources */,
+				2315AF632BF6647800093BE9 /* ImageTableViewCell.xib in Resources */,
 				23ED019A2BF52A6600A41E48 /* LiveFeedViewController.xib in Resources */,
 				23ED01882BF5206000A41E48 /* Main.storyboard in Resources */,
 			);
@@ -219,6 +234,7 @@
 				2315AF5A2BF6590300093BE9 /* ImageCollectionViewCell.swift in Sources */,
 				23ED01A62BF53FCC00A41E48 /* GalleryViewModel.swift in Sources */,
 				23ED019C2BF52AE600A41E48 /* ResultsViewController.swift in Sources */,
+				2315AF612BF6646200093BE9 /* ImageTableViewCell.swift in Sources */,
 				2315AF5E2BF65C5100093BE9 /* Extensions.swift in Sources */,
 				23ED01832BF5206000A41E48 /* SceneDelegate.swift in Sources */,
 			);

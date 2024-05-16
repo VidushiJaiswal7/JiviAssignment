@@ -1,67 +1,28 @@
 //
-//  ResultsViewController.swift
+//  ImageTableViewCell.swift
 //  JiviAssignment
 //
-//  Created by Vidushi Jaiswal on 15/05/24.
+//  Created by Vidushi Jaiswal on 16/05/24.
 //
 
+import AVFoundation
 import Foundation
 import UIKit
 import Vision
 
-class ResultsViewControllerFactory: NSObject {
-    class func produce(withImages images: [UIImage]) -> ResultsViewController {
-        let resultsVC = ResultsViewController(nibName: "ResultsViewController",
-                                               bundle: nil)
-        resultsVC.images = images
-        return resultsVC
-    }
-}
-
-class ResultsViewController: UIViewController {
+class ImageTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var imageView: UIImageView!
-    var image: UIImage?
-    var images: [UIImage] = []
-    var selectedIndex = 0  { didSet {
-        self.handleImage()
-    }}
-    private var faceLayers: [CAShapeLayer] = []
+    @IBOutlet weak var resultsImage: UIImageView!
     var scaledImageRect: CGRect?
     
-    var viewModel = ResultsViewModel()
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        reset()
     }
     
-    @IBAction func nextPressed(_ sender: Any) {
-        if (selectedIndex + 1) > (images.count - 1) {
-            selectedIndex = images.count - 1
-        } else {
-            selectedIndex += 1
-        }
-    }
-    
-    @IBAction func backPressed(_ sender: Any) {
-        if (selectedIndex - 1) > 0 {
-            selectedIndex -= 1
-        } else {
-            selectedIndex = 0
-        }
-    }
-    
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        handleImage()
-    }
-
-    private func handleImage() {
-        let image = images[selectedIndex]
-        imageView.image = image
+    func render(withImage image: UIImage) {
+        reset()
+        self.resultsImage.image = image
         
         guard let cgImage = image.cgImage else {
             return
@@ -69,10 +30,11 @@ class ResultsViewController: UIViewController {
         
         calculateScaledImageRect()
         performVisionRequest(image: cgImage)
+        
     }
     
     private func calculateScaledImageRect() {
-        guard let image = imageView.image else {
+        guard let image = resultsImage.image else {
             return
         }
 
@@ -83,7 +45,7 @@ class ResultsViewController: UIViewController {
         let originalWidth = CGFloat(cgImage.width)
         let originalHeight = CGFloat(cgImage.height)
 
-        let imageFrame = imageView.frame
+        let imageFrame = resultsImage.frame
         let widthRatio = originalWidth / imageFrame.width
         let heightRatio = originalHeight / imageFrame.height
 
@@ -132,9 +94,8 @@ class ResultsViewController: UIViewController {
         let imageHeight = imageRect.size.height
         
         DispatchQueue.main.async {
-            self.deleteDrawing()
-            self.imageView.layer.sublayers = nil
             
+            self.resultsImage.layer.sublayers = nil
             if let results = request?.results as? [VNFaceObservation] {
                 
                 for observation in results {
@@ -153,25 +114,22 @@ class ResultsViewController: UIViewController {
                     faceLayer.path = faceRectanglePath
                     faceLayer.fillColor = UIColor.clear.cgColor
                     faceLayer.strokeColor = UIColor.yellow.cgColor
-                    self.imageView.layer.addSublayer(faceLayer)
+                    self.resultsImage.layer.addSublayer(faceLayer)
                     
                     //FACE LANDMARKS
                     if let landmarks = observation.landmarks {
                         if let leftEye = landmarks.leftEye {
                             self.handleLandmark(leftEye, faceBoundingBox: scaledObservationRect)
                         }
-//                        
-//                        if let leftEyebrow = landmarks.leftEyebrow {
-//                            self.handleLandmark(leftEyebrow, faceBoundingBox: scaledObservationRect)
-//                        }
-                        
+                        if let leftEyebrow = landmarks.leftEyebrow {
+                            self.handleLandmark(leftEyebrow, faceBoundingBox: scaledObservationRect)
+                        }
                         if let rightEye = landmarks.rightEye {
                             self.handleLandmark(rightEye, faceBoundingBox: scaledObservationRect)
                         }
-                        
-//                        if let rightEyebrow = landmarks.rightEyebrow {
-//                            self.handleLandmark(rightEyebrow, faceBoundingBox: scaledObservationRect)
-//                        }
+                        if let rightEyebrow = landmarks.rightEyebrow {
+                            self.handleLandmark(rightEyebrow, faceBoundingBox: scaledObservationRect)
+                        }
 
                         if let nose = landmarks.nose {
                             self.handleLandmark(nose, faceBoundingBox: scaledObservationRect)
@@ -180,16 +138,14 @@ class ResultsViewController: UIViewController {
                         if let outerLips = landmarks.outerLips {
                             self.handleLandmark(outerLips, faceBoundingBox: scaledObservationRect)
                         }
-                        
-//                        if let innerLips = landmarks.innerLips {
-//                            self.handleLandmark(innerLips, faceBoundingBox: scaledObservationRect)
-//                        }
+                        if let innerLips = landmarks.innerLips {
+                            self.handleLandmark(innerLips, faceBoundingBox: scaledObservationRect)
+                        }
                     }
                 }
             }
         }
     }
-    
     
     private func handleLandmark(_ eye: VNFaceLandmarkRegion2D, faceBoundingBox: CGRect) {
         let landmarkPath = CGMutablePath()
@@ -214,9 +170,8 @@ class ResultsViewController: UIViewController {
          shapeLayer.fillColor = UIColor.red.cgColor
          shapeLayer.strokeColor = UIColor.red.cgColor
          shapeLayer.lineWidth = 1.0
-        shapeLayer.name = "shape"
          
-         view.layer.addSublayer(shapeLayer)
+         self.layer.addSublayer(shapeLayer)
 
 //        self.faceLayers.append(landmarkLayer)
 //        self.view.layer.addSublayer(landmarkLayer)
@@ -224,20 +179,15 @@ class ResultsViewController: UIViewController {
         if let firstPoint = landmarkPathPoints.first {
               let convertedPoint = firstPoint
               let labelLayer = CATextLayer()
-            labelLayer.string = viewModel.abmornmalities.randomElement()
+              labelLayer.string = "TEST"
               labelLayer.foregroundColor = UIColor.blue.cgColor
               labelLayer.fontSize = 12
               labelLayer.frame = CGRect(x: convertedPoint.x, y: convertedPoint.y, width: 50, height: 20)
-            labelLayer.name = "label"
-              view.layer.addSublayer(labelLayer)
+              self.layer.addSublayer(labelLayer)
           }
     }
     
-    func deleteDrawing() {
-        view.layer.sublayers?.forEach { layer in
-            if layer.name == "label" || layer.name == "shape" {
-                   layer.removeFromSuperlayer()
-               }
-           }
+    func reset() {
+        self.resultsImage.image = nil
     }
 }
