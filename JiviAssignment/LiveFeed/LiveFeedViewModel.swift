@@ -14,8 +14,6 @@ class LiveFeedViewModel {
     var captureDevice: AVCaptureDevice?
     var takePhoto: Bool = false
     
-    var showDoneButton: (() -> Void)?
-    var hideDoneButton: (() -> Void)?
     var goBack: (() -> Void)?
     var showPermissionAlert: (() -> Void)?
     var reload: (() -> Void)?

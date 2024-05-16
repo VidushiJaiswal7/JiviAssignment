@@ -58,7 +58,7 @@ class ResultsViewController: UIViewController {
     }
     
     @IBAction func saveResultsPressed(_ sender: Any) {
-        
+        viewModel.saveImage(image: images[selectedIndex])
     }
     
     @IBAction func nextPressed(_ sender: Any) {
@@ -82,9 +82,11 @@ class ResultsViewController: UIViewController {
         super.viewDidAppear(animated)
         
         handleImage()
+        
     }
 
     private func handleImage() {
+        viewModel.reset()
         let image = images[selectedIndex]
         imageView.image = image
         
@@ -125,6 +127,7 @@ class ResultsViewController: UIViewController {
     }
     
     private func performVisionRequest(image: CGImage) {
+        self.viewModel.state = "Processing"
         self.stateButton.setTitle("Processing", for: .normal)
          let faceDetectionRequest = VNDetectFaceLandmarksRequest(completionHandler: self.handleFaceDetectionRequest)
 
@@ -162,6 +165,7 @@ class ResultsViewController: UIViewController {
             
             if let results = request?.results as? [VNFaceObservation],
                results.count > 0 {
+                self.viewModel.state = "Processed"
                 self.stateButton.setTitle("Processed", for: .normal)
                 for observation in results {
                     
@@ -201,6 +205,7 @@ class ResultsViewController: UIViewController {
                     }
                 }
             } else {
+                self.viewModel.state = "Invalid"
                 self.stateButton.setTitle("Invalid", for: .normal)
             }
         }
@@ -231,7 +236,9 @@ class ResultsViewController: UIViewController {
         if let firstPoint = landmarkPathPoints.first {
               let convertedPoint = firstPoint
               let labelLayer = CATextLayer()
-            labelLayer.string = viewModel.abmornmalities.randomElement()
+            let abnormality = viewModel.abmornmalities.randomElement()
+            labelLayer.string = abnormality
+            viewModel.selectedAbnormalities.append(abnormality ?? "")
               labelLayer.foregroundColor = UIColor.blue.cgColor
               labelLayer.fontSize = 10
               labelLayer.frame = CGRect(x: convertedPoint.x, y: convertedPoint.y, width: 80, height: 20)
